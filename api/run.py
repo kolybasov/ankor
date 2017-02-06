@@ -14,13 +14,15 @@ db = connection.cursor()
 # Create Flask app
 app = Flask(__name__)
 
+
 @app.route('/')
 def greeting():
     return 'Ankor!'
 
+
 # Run server
 if __name__ == '__main__':
     app.run(
-        host=config['server']['host'], 
+        host=config['server']['host'],
         port=config['server']['port']
     )

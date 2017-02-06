@@ -14,9 +14,9 @@ const developmentURL = 'http://127.0.0.1:3000';
 
 let mainWindow;
 
-function createWindow () {
+function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 800, 
+    width: 800,
     height: 600,
   });
 

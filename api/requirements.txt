@@ -1,2 +1,4 @@
 Flask==0.12.0
 PyYAML==3.12.0
+xerox==0.4.1
+pytest==3.0.6
