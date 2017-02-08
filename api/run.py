@@ -2,7 +2,6 @@ import yaml
 import io
 
 from flask import Flask
-
 from ankor.db import Database
 
 # Parse config
@@ -26,3 +25,4 @@ if __name__ == '__main__':
         host=config['server']['host'],
         port=config['server']['port']
     )
+    db.close()
