@@ -2,7 +2,7 @@ from time import sleep
 
 import xerox
 
-from clipboard_monitor import ClipboardMonitor
+from .clipboard_monitor import ClipboardMonitor
 
 TEST_INTERVAL = .1
 TEST_STRING = 'clipboard_test'
