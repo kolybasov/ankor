@@ -1,15 +1,15 @@
 import yaml
 import io
-import sqlite3
 
 from flask import Flask
+
+from ankor.db import Database
 
 # Parse config
 config = yaml.load(io.open('./config.yml', 'r'))
 
 # Connect to DB
-connection = sqlite3.connect('./ankor_storage.db')
-db = connection.cursor()
+db = Database(config['db']['name'])
 
 # Create Flask app
 app = Flask(__name__)
