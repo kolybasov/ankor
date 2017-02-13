@@ -1,10 +1,12 @@
 from .model import Model
+from .db import Database
 
 
 class ExampleModel(Model):
     @classmethod
     def create_test_table(cls):
-        cls.__db__.execute("""CREATE TABLE example_models (
+        db = Database()
+        db.execute("""CREATE TABLE example_models (
             id INTEGER PRIMARY KEY,
             test TEXT,
             test1 TEXT

@@ -22,4 +22,7 @@ class TestLinkUtils:
         Page URL will return ('Example Domain', None).
         """
         assert LinkUtils.fetch_info(self.INVALID_URL) is None
-        assert LinkUtils.fetch_info(self.PAGE_URL) == ('Example Domain', None)
+        assert LinkUtils.fetch_info(self.PAGE_URL) == {
+            'title': 'Example Domain',
+            'description': None,
+        }

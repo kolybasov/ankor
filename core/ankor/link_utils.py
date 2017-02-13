@@ -42,6 +42,6 @@ class LinkUtils:
             if description is None:
                 description = pq('meta[name="description"]').attr('content')
 
-            return (title, description)
+            return {'title': title, 'description': description}
         except (URLError, ValueError):
             return None
