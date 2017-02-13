@@ -13,6 +13,7 @@ class Database:
         """
         if self.__class__.__connection__ is None:
             self.__class__.__connection__ = sqlite3.connect(db)
+            self.__class__.__connection__.row_factory = sqlite3.Row
 
     def execute(self, *args):
         """ Shorthand for sqlite3.Connection.execute method. """
