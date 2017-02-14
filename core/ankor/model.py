@@ -3,16 +3,11 @@ from .db import Database
 from inflection import underscore, pluralize
 
 
-def dict_from_row(row):
-    return dict(zip(row.keys(), row))
-
-
 class Model(ABC):
     """ Abstract model class to work with DB entities as objects. """
 
     __db__ = Database()
     __primary_key__ = 'id'
-    __schema__ = []
 
     def __init__(self, **kwargs):
         """ Create new model instance. """
@@ -20,17 +15,28 @@ class Model(ABC):
         self.__create_tablename__()
 
         # Get table schema from DB if it is not present yet
-        if len(self.__schema__) == 0:
-            schema_query = 'PRAGMA table_info({})'.format(self.__tablename__)
-            schema = self.__db__.execute(schema_query)
+        if not hasattr(self.__class__, '__schema__'):
+            # Create fields list shared among all instances
+            setattr(self.__class__, '__schema__', [])
 
-            for field in schema.fetchall():
+            # Ask DB for table schema
+            schema_query = 'PRAGMA table_info({})'.format(self.__tablename__)
+            result = self.__db__.execute(schema_query)
+
+            for field in result.fetchall():
+                # Get each field name and default value
                 field_name = field['name']
-                self.__schema__.append(field_name)
-                setattr(self, field_name, kwargs.get(field_name, None))
+                field_val = kwargs.get(field_name, field['dflt_value'])
+
+                self.__class__.__schema__.append(field_name)
+                setattr(self, field_name, field_val)
         else:
-            for field in self.__schema__:
-                setattr(self, field, kwargs.get(field, None))
+            for field in self.__class__.__schema__:
+                field_val = kwargs.get(field, None)
+                if field_val is not None:
+                    setattr(self, field, field_val)
+                else:
+                    setattr(self, field, None)
 
     @classmethod
     def __create_tablename__(cls):
@@ -119,7 +125,7 @@ class Model(ABC):
         record = result.fetchone()
 
         if record is not None:
-            fields = dict_from_row(record)
+            fields = dict(record)
 
             return cls(**fields)
         else:
@@ -138,4 +144,4 @@ class Model(ABC):
         if len(records) == 0:
             return records
         else:
-            return [cls(**dict_from_row(r)) for r in records]
+            return [cls(**dict(r)) for r in records]
