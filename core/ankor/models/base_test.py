@@ -1,8 +1,8 @@
-from .model import Model
-from .db import Database
+from .base import BaseModel
+from ..db import Database
 
 
-class ExampleModel(Model):
+class ExampleModel(BaseModel):
     @classmethod
     def create_test_table(cls):
         db = Database()

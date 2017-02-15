@@ -1,7 +1,7 @@
-from ..model import Model
+from .base import BaseModel
 
 
-class Settings(Model):
+class Settings(BaseModel):
     """ Representation of user settings for Ankor app. """
 
     """ DB fields for settings:

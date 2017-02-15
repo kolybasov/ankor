@@ -1,8 +1,8 @@
-from ..model import Model
+from .base import BaseModel
 from ..link_utils import LinkUtils
 
 
-class Link(Model):
+class Link(BaseModel):
     """ Link model. """
 
     """ DB fields for link:

@@ -1,9 +1,9 @@
 from abc import ABC
-from .db import Database
+from ..db import Database
 from inflection import underscore, pluralize
 
 
-class Model(ABC):
+class BaseModel(ABC):
     """ Abstract model class to work with DB entities as objects. """
 
     __db__ = Database()
