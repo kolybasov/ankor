@@ -6,8 +6,7 @@ CREATE TABLE links(
   description TEXT(255),
   media_type TEXT(20),
   short_url TEXT(30),
-  created_at NUMERIC NOT NULL,
-  updated_at NUMERIC NOT NULL
+  created_at INTEGER(4) DEFAULT CURRENT_TIMESTAMP
 );
 
 /* Create settings table and fill with defaults */

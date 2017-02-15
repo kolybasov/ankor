@@ -1,5 +1,6 @@
 from .base import BaseModel
 from ..link_utils import LinkUtils
+from ..shortener import Shortener
 
 
 class Link(BaseModel):
@@ -13,7 +14,6 @@ class Link(BaseModel):
     media_type -- string(20), values: page/image
     short_url -- string(30)
     created_at -- timestamp
-    updated_at -- timestamp
     """
     def __init__(self, **kwargs):
         """ Create new link and assign default values. """
@@ -28,3 +28,13 @@ class Link(BaseModel):
 
             self.title = link_info['title']
             self.description = link_info['description']
+
+    def short(self):
+        """ Short current url and save it to DB. """
+        if self.short_url is None:
+            shortener = Shortener(self.url)
+            self.short_url = shortener.short()
+
+            self.save()
+
+        return self.short_url
