@@ -1,5 +1,7 @@
-from .root import get as root_get
+from .links import LinksRoute
+from .root import RootRoute
 
 __all__ = [
-    'root_get'
+    'RootRoute',
+    'LinksRoute'
 ]

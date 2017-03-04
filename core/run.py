@@ -2,8 +2,10 @@ import config as cfg
 
 from flask import Flask
 from ankor import Database
-
-import routes
+from routes import (
+    LinksRoute,
+    RootRoute
+)
 
 # Connect to DB
 db = Database(cfg.get('db.name', './ankor_sqlite.db'))
@@ -12,7 +14,29 @@ db = Database(cfg.get('db.name', './ankor_sqlite.db'))
 app = Flask(__name__)
 
 # Router
-app.route('/')(routes.root_get)
+root_route = RootRoute(app)
+links_route = LinksRoute(app)
+
+# /
+app.add_url_rule(
+    '/',
+    'index',
+    root_route.call
+)
+
+# /links
+app.add_url_rule(
+    '/links',
+    'links',
+    links_route.call,
+    methods=['GET', 'POST']
+)
+app.add_url_rule(
+    '/links/<id>',
+    'links',
+    links_route.call,
+    methods=['GET', 'PUT', 'DELETE']
+)
 
 # Run server
 if __name__ == '__main__':
