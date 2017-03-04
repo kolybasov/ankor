@@ -1,28 +1,23 @@
-import yaml
-import io
+import config as cfg
 
 from flask import Flask
-from ankor.db import Database
+from ankor import Database
 
-# Parse config
-config = yaml.load(io.open('./config.yml', 'r'))
+import routes
 
 # Connect to DB
-db = Database(config['db']['name'])
+db = Database(cfg.get('db.name', './ankor_sqlite.db'))
 
 # Create Flask app
 app = Flask(__name__)
 
-
-@app.route('/')
-def greeting():
-    return 'Ankor!'
-
+# Router
+app.route('/')(routes.root_get)
 
 # Run server
 if __name__ == '__main__':
     app.run(
-        host=config['server']['host'],
-        port=config['server']['port']
+        host=cfg.get('server.host', '127.0.0.1'),
+        port=cfg.get('server.port', 3333)
     )
     db.close()
