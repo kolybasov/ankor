@@ -13,10 +13,16 @@ from routes import (
 # Connect to DB
 db = Database(cfg.get('db.name', './ankor_sqlite.db'))
 
+# Prepare models
 models.setup(db)
 
 # Create Flask app
 app = Flask(__name__)
+
+# Set secret
+app.config.update(dict(
+    SECRET_KEY='development'
+))
 
 # Router
 root_route = RootRoute(app)

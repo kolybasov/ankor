@@ -18,3 +18,22 @@
     </div>
   </div>
 </nav>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <section class="section notifications is-paddingless">
+      <div class="container">
+        <div class="columns">
+          <div class="column -is-8 -is-offset-2">
+            {% for category, message in messages %}
+              <div class="notification is-{{ category }}">
+                <button class="delete" onclick="deleteParentBox()"></button>
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+{% endwith %}
