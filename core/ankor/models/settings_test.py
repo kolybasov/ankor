@@ -13,6 +13,7 @@ class TestSettings:
           short_all_links NUMERIC(1) NOT NULL DEFAULT 0,
           api_provider TEXT(20) NOT NULL DEFAULT google
         )""")
+        Settings.__setup__(cls.__db__)
 
     @classmethod
     def teardown_method(cls):

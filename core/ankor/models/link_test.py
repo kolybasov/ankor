@@ -17,6 +17,7 @@ class TestLink:
             short_url TEXT(30),
             created_at INTEGER(4) DEFAULT CURRENT_TIMESTAMP
         )""")
+        Link.__setup__(cls.__db__)
 
     @classmethod
     def teardown_method(cls):

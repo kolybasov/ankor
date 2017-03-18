@@ -3,26 +3,23 @@ from ..db import Database
 
 
 class ExampleModel(BaseModel):
+    pass
+
+
+class TestModel:
     @classmethod
-    def create_test_table(cls):
-        db = Database()
-        db.execute("""CREATE TABLE example_models (
+    def setup_method(cls, method):
+        cls.__db__ = Database()
+        cls.__db__.execute("""CREATE TABLE example_models (
             id INTEGER PRIMARY KEY,
             test TEXT,
             test1 TEXT
         )""")
+        ExampleModel.__setup__(cls.__db__)
 
     @classmethod
-    def drop_test_table(cls):
+    def teardown_method(cls, method):
         cls.__db__.execute('DROP TABLE example_models')
-
-
-class TestModel:
-    def setup_method(self, method):
-        ExampleModel.create_test_table()
-
-    def teardown_method(self, method):
-        ExampleModel.drop_test_table()
 
     def test_create_tablename(self):
         model = ExampleModel()

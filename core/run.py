@@ -2,6 +2,7 @@ import config as cfg
 
 from flask import Flask
 from ankor import Database
+from ankor import models
 from routes import (
     LinksRoute,
     RootRoute
@@ -9,6 +10,8 @@ from routes import (
 
 # Connect to DB
 db = Database(cfg.get('db.name', './ankor_sqlite.db'))
+
+models.setup(db)
 
 # Create Flask app
 app = Flask(__name__)
