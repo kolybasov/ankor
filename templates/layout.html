@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Ankor</title>
+  </head>
+  <body>
+    <div class=page>
+      <h1>Ankor</h1>
+      {% for message in get_flashed_messages() %}
+        <div class=flash>{{ message }}</div>
+      {% endfor %}
+
+      {% block body %}{% endblock %}
+    </div>
+  </body>
+</html>

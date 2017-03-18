@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Links list</h2>
+  <ul>
+    {% for link in links %}
+      <li>
+        <a href="{{ link.url }}">{{ link.title }}</a> –
+        {{ link.description }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
