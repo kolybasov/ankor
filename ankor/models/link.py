@@ -19,15 +19,26 @@ class Link(BaseModel):
         """ Create new link and assign default values. """
         super().__init__(**kwargs)
 
+        save = False
         # Detect url media type
-        self.media_type = LinkUtils.detect_media_type(kwargs['url'])
+        if self.media_type is None:
+            self.media_type = LinkUtils.detect_media_type(kwargs['url'])
+            save = True
 
         # Fetch information about link from url if it is page
-        if self.media_type == 'page':
+        if (self.title is None and
+                self.description is None and
+                self.media_type == 'page'):
             link_info = LinkUtils.fetch_info(kwargs['url'])
+            save = True
+            if link_info:
+                self.title = link_info['title']
+                self.description = link_info['description']
+            else:
+                self.title = kwargs['url']
 
-            self.title = link_info['title']
-            self.description = link_info['description']
+        if save:
+            self.save()
 
     def short(self):
         """ Short current url and save it to DB. """

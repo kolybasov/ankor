@@ -1,12 +1,71 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h2>Links list</h2>
-  <ul>
-    {% for link in links %}
-      <li>
-        <a href="{{ link.url }}">{{ link.title }}</a> –
-        {{ link.description }}
-      </li>
-    {% endfor %}
-  </ul>
+  <section class="section links-page">
+    <div class="container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Actions</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          {% for link in links %}
+            <tr>
+              <td>{{ link.id }}</td>
+              <td>{{ link.title }}</td>
+              <td>{{ link.description }}</td>
+              <td>{{ link.media_type }}</td>
+              <td>
+                <div class="field has-addons">
+                  <p class="control">
+                    <a class="button is-primary">
+                      <span class="icon is-small">
+                        <i class="fa fa-external-link-square"></i>
+                      </span>
+                      <span>Short</span>
+                    </a>
+                  </p>
+
+                  <p class="control">
+                    <a class="button is-danger">
+                      <span class="icon is-small">
+                        <i class="fa fa-trash"></i>
+                      </span>
+                      <span>Delete</span>
+                    </a>
+                  </p>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% if fetch_more %}
+        <div class="columns">
+          <div class="column is-2 is-offset-5">
+            <button class="button is-medium" onclick="fetchMoreLinks()">
+              <span class="icon is-small">
+                <i class="fa fa-arrow-down"></i>
+              </span>
+              <span>Load more…</span>
+            </button>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
 {% endblock %}

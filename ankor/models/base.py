@@ -81,7 +81,8 @@ class BaseModel(ABC):
             placeholders
         )
 
-        result = self.__db__.execute(query, values)
+        self.__db__.execute(query, values)
+        result = self.__db__.__connection__.commit()
 
         last_id = result.lastrowid
         setattr(self, self.__primary_key__, last_id)
@@ -105,7 +106,8 @@ class BaseModel(ABC):
             primary_key_val=primary_key_val
         )
 
-        return self.__db__.execute(query, values)
+        self.__db__.execute(query, values)
+        return self.__db__.__connection__.commit()
 
     def save(self):
         """ Update existing record or create new. """
@@ -152,12 +154,12 @@ class BaseModel(ABC):
             return [cls(**dict(r)) for r in records]
 
     @classmethod
-    def query(cls, query):
+    def query(cls, query, *args):
         """ Allow custom queries. """
 
         query = query.format(table=cls.__tablename__)
 
-        result = cls.__db__.execute(query)
+        result = cls.__db__.execute(query, *args)
 
         records = result.fetchall()
 

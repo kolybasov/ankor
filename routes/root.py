@@ -9,7 +9,7 @@ class RootRoute(BaseRoute):
             'SELECT COUNT(*) as count FROM {table}'
         )[0]['count']
         shortLinksCount = Link.query(
-            'SELECT COUNT(*) as count FROM {table} WHERE short_url<>NULL'
+            'SELECT COUNT(*) as count FROM {table} WHERE short_url IS NOT NULL'
         )[0]['count']
 
         return render_template(
