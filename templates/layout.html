@@ -1,16 +1,17 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Ankor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/bulma.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/app.css') }}">
   </head>
   <body>
-    <div class=page>
-      <h1>Ankor</h1>
-      {% for message in get_flashed_messages() %}
-        <div class=flash>{{ message }}</div>
-      {% endfor %}
-
-      {% block body %}{% endblock %}
-    </div>
+    {% include "header.html" %}
+    {% block body %}{% endblock %}
+    <script src="{{ url_for('static', filename='scripts/app.js') }}"></script>
   </body>
 </html>
