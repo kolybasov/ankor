@@ -150,3 +150,18 @@ class BaseModel(ABC):
             return records
         else:
             return [cls(**dict(r)) for r in records]
+
+    @classmethod
+    def query(cls, query):
+        """ Allow custom queries. """
+
+        query = query.format(table=cls.__tablename__)
+
+        result = cls.__db__.execute(query)
+
+        records = result.fetchall()
+
+        if len(records) == 0 or 'id' not in records[0].keys():
+            return records
+        else:
+            return [cls(**dict(r)) for r in records]

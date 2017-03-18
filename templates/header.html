@@ -1,7 +1,14 @@
-<nav class="nav">
+<nav class="nav has-shadow">
   <div class="container">
     <div class="nav-left">
-      <a href="#" class="nav-item">Links</a>
+      <p class="nav-item">
+        <a href="{{ url_for('links' )}}" class="button">
+          <span class="icon is-small">
+            <i class="fa fa-link"></i>
+          </span>
+          <span>Links</span>
+        </a>
+      </p>
     </div>
 
     <div class="nav-center">
@@ -14,7 +21,14 @@
     </div>
 
     <div class="nav-right">
-      <a href="#" class="nav-item">Settings</a>
+      <p class="nav-item">
+        <a href="{{ url_for('settings') }}" class="button">
+          <span class="icon is-small">
+            <i class="fa fa-cogs"></i>
+          </span>
+          <span>Settings</span>
+        </a>
+      </p>
     </div>
   </div>
 </nav>

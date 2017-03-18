@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block body %}
+  <section class="section index-page">
+    <div class="container">
+      <div class="tile is-ancestor">
+        <div class="tile is-parent is-4">
+          <div class="tile is-child notification is-warning">
+            <div class="content">
+              <p class="title is-2">Saved links</p>
+              <p class="subtitle is-2">
+                <span class="icon is-large">
+                  <i class="fa fa-link"></i>
+                </span>
+                <span>{{ linksCount }}</span>
+              </p>
+              <p class="content has-text-right">
+                <a href="{{ url_for('links') }}">See all…</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tile is-parent is-4">
+          <div class="tile is-child notification is-info">
+            <div class="content">
+              <p class="title is-2">Shortened links</p>
+              <p class="subtitle is-2">
+                <span class="icon is-large">
+                  <i class="fa fa-external-link-square"></i>
+                </span>
+                <span>{{ shortLinksCount }}</span>
+              </p>
+              <p class="content has-text-right">
+                <a href="{{ url_for('links', filter='short') }}">See all…</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tile is-parent">
+          <div class="tile is-child notification is-primary">
+            <div class="content">
+              <p class="title is-2">About</p>
+              <p class="subtitle is-6">
+                Ankor monitors your clipboard and transforms all links to short form.
+              </p>
+              <div class="content has-text-centered">
+                <a href="https://github.com/kolybasov/ankor" target="_blank" rel="nofollow">
+                  <span class="icon is-large">
+                    <i class="fa fa-github"></i>
+                  </span><br>
+                  <span>See source</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

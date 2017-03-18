@@ -1,0 +1,6 @@
+/**
+  * INDEX PAGE
+ */
+.index-page .notification.is-primary a:not(:hover) {
+  color: #ffffff;
+}

@@ -7,7 +7,8 @@ from ankor import Database
 from ankor import models
 from routes import (
     LinksRoute,
-    RootRoute
+    RootRoute,
+    SettingsRoute
 )
 
 # Connect to DB
@@ -27,6 +28,7 @@ app.config.update(dict(
 # Router
 root_route = RootRoute(app)
 links_route = LinksRoute(app)
+settings_route = SettingsRoute(app)
 
 # /
 app.add_url_rule(
@@ -48,11 +50,18 @@ app.add_url_rule(
     links_route.call,
     methods=['GET', 'PUT', 'DELETE']
 )
+app.add_url_rule(
+    '/settings',
+    'settings',
+    settings_route.call,
+    methods=['GET']
+)
 
 # Run server
 if __name__ == '__main__':
     app.run(
         host=cfg.get('server.host', '127.0.0.1'),
-        port=cfg.get('server.port', 3333)
+        port=cfg.get('server.port', 3333),
+        debug=True
     )
     db.close()
