@@ -81,8 +81,8 @@ class BaseModel(ABC):
             placeholders
         )
 
-        self.__db__.execute(query, values)
-        result = self.__db__.__connection__.commit()
+        result = self.__db__.execute(query, values)
+        self.__db__.__connection__.commit()
 
         last_id = result.lastrowid
         setattr(self, self.__primary_key__, last_id)

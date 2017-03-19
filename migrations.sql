@@ -12,8 +12,6 @@ CREATE TABLE links(
 /* Create settings table and fill with defaults */
 CREATE TABLE settings(
   id INTEGER PRIMARY KEY,
-  listen_clipboard NUMERIC(1) NOT NULL DEFAULT 1,
-  start_at_login NUMERIC(1) NOT NULL DEFAULT 0,
   short_all_links NUMERIC(1) NOT NULL DEFAULT 0,
-  api_provider TEXT(20) NOT NULL DEFAULT 'google'
+  api_provider TEXT(20) NOT NULL DEFAULT google
 );

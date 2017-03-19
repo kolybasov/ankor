@@ -45,7 +45,7 @@ app.add_url_rule(
     methods=['GET', 'POST']
 )
 app.add_url_rule(
-    '/links/<id>',
+    '/links/<int:id>',
     'links',
     links_route.call,
     methods=['GET', 'PUT', 'DELETE']
@@ -54,7 +54,7 @@ app.add_url_rule(
     '/settings',
     'settings',
     settings_route.call,
-    methods=['GET']
+    methods=['GET', 'POST']
 )
 
 # Run server
