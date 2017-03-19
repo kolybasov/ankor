@@ -45,25 +45,28 @@ class LinksRoute(BaseRoute):
         link = Link.find(id)
 
         if action == 'short':
-            if link.short_url is None:
-                settings = Settings.all()
-                if len(settings) == 0:
-                    settings = Settings()
-                    settings.save()
-                else:
-                    settings = settings[0]
-
-                link.short(settings.api_provider)
-
-            copy(link.short_url)
-            flash(
-                u'Link has been shortened and copied to clipboard. {}'.format(
-                    link.short_url
-                ),
-                'success'
-            )
+            self.__short__(link)
         elif action == 'delete':
             link.destroy()
             flash(u'Link has been deleted.', 'warning')
 
         return redirect('links')
+
+    def __short__(self, link):
+        if link.short_url is None:
+            settings = Settings.all()
+            if len(settings) == 0:
+                settings = Settings()
+                settings.save()
+            else:
+                settings = settings[0]
+
+            link.short(settings.api_provider)
+
+        copy(link.short_url)
+        flash(
+            u'Link has been shortened and copied to clipboard. {}'.format(
+                link.short_url
+            ),
+            'success'
+        )
