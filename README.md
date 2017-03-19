@@ -1,5 +1,8 @@
 # Ankor
 
+![main](https://i.imgur.com/c9BWAHW.png)
+![links](https://i.imgur.com/X7RbbjA.png)
+
 ## Requirements
 
 * python 3
