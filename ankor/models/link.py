@@ -40,10 +40,10 @@ class Link(BaseModel):
         if save:
             self.save()
 
-    def short(self):
+    def short(self, provider='google'):
         """ Short current url and save it to DB. """
         if self.short_url is None:
-            shortener = Shortener(self.url)
+            shortener = Shortener(self.url, provider)
             self.short_url = shortener.short()
 
             self.save()

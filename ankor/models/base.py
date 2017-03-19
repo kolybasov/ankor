@@ -116,6 +116,18 @@ class BaseModel(ABC):
         else:
             return self.__update__()
 
+    def destroy(self):
+        """ Delete record from databse. """
+
+        query = 'DELETE FROM {table} WHERE {pk_name}={pk_val}'.format(
+            table=self.__tablename__,
+            pk_name=self.__primary_key__,
+            pk_val=getattr(self, self.__primary_key__)
+        )
+
+        self.__db__.execute(query)
+        return self.__db__.__connection__.commit()
+
     @classmethod
     def find(cls, pk):
         """ Find record by primary key and return new instance or None

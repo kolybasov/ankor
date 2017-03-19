@@ -29,40 +29,53 @@
               <td>{{ link.description }}</td>
               <td>{{ link.media_type }}</td>
               <td>
-                <div class="field has-addons">
+                <form action="{{ url_for('links') }}" method="POST" class="field has-addons">
                   <p class="control">
-                    <a class="button is-primary">
+                    <button type="submit" onclick="linkAction(event, 'short')" class="button is-primary">
                       <span class="icon is-small">
                         <i class="fa fa-external-link-square"></i>
                       </span>
                       <span>Short</span>
-                    </a>
+                    </button>
                   </p>
 
                   <p class="control">
-                    <a class="button is-danger">
+                    <button type="submit" onclick="linkAction(event, 'delete')" class="button is-danger">
                       <span class="icon is-small">
                         <i class="fa fa-trash"></i>
                       </span>
                       <span>Delete</span>
-                    </a>
+                    </button>
                   </p>
-                </div>
+                  <input type="hidden" value="{{ link.id }}" name="link_id">
+                  <input type="hidden" value="short" name="action">
+                </form>
               </td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
 
-      {% if fetch_more %}
+      {% if fetch_more or fetch_previous %}
         <div class="columns">
-          <div class="column is-2 is-offset-5">
-            <button class="button is-medium" onclick="fetchMoreLinks()">
-              <span class="icon is-small">
-                <i class="fa fa-arrow-down"></i>
-              </span>
-              <span>Load more…</span>
-            </button>
+          <div class="column is-12 has-text-center">
+            {% if fetch_previous %}
+              <a href="{{ url_for('links', page=(page-1)) }}" class="button is-medium">
+                <span class="icon is-small">
+                  <i class="fa fa-arrow-up"></i>
+                </span>
+                <span>Load previous</span>
+              </a>
+            {% endif %}
+
+            {% if fetch_more %}
+              <a href="{{ url_for('links', page=(page+1)) }}" class="button is-medium">
+                <span class="icon is-small">
+                  <i class="fa fa-arrow-down"></i>
+                </span>
+                <span>Load next</span>
+              </a>
+            {% endif %}
           </div>
         </div>
       {% endif %}
