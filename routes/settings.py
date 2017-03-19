@@ -10,12 +10,7 @@ class SettingsRoute(BaseRoute):
         ]
 
         # get settings or create default  is not present
-        settings = Settings.all()
-        if len(settings) == 0:
-            settings = Settings()
-            settings.save()
-        else:
-            settings = settings[0]
+        settings = Settings.default()
 
         return render_template(
             'settings.html',

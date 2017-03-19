@@ -3,7 +3,7 @@ from ankor.models import Link, Settings
 from flask import render_template, request, redirect, flash
 from xerox import copy
 
-PER_PAGE = 15
+PER_PAGE = 10
 
 
 class LinksRoute(BaseRoute):
@@ -12,7 +12,7 @@ class LinksRoute(BaseRoute):
             query = """
                 SELECT *
                 FROM {table}
-                ORDER BY created_at DESC
+                ORDER BY id DESC
                 LIMIT ?
                 OFFSET ?
             """
@@ -21,7 +21,7 @@ class LinksRoute(BaseRoute):
                 SELECT *
                 FROM {table}
                 WHERE short_url IS NOT NULL
-                ORDER BY created_at DESC
+                ORDER BY id DESC
                 LIMIT ?
                 OFFSET ?
             """
@@ -54,13 +54,7 @@ class LinksRoute(BaseRoute):
 
     def __short__(self, link):
         if link.short_url is None:
-            settings = Settings.all()
-            if len(settings) == 0:
-                settings = Settings()
-                settings.save()
-            else:
-                settings = settings[0]
-
+            settings = Settings.default()
             link.short(settings.api_provider)
 
         copy(link.short_url)

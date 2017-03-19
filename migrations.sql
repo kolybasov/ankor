@@ -5,8 +5,7 @@ CREATE TABLE links(
   title TEXT(100),
   description TEXT(255),
   media_type TEXT(20),
-  short_url TEXT(30),
-  created_at INTEGER(4) DEFAULT CURRENT_TIMESTAMP
+  short_url TEXT(30)
 );
 
 /* Create settings table and fill with defaults */

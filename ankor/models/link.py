@@ -13,7 +13,6 @@ class Link(BaseModel):
     description -- string(255)
     media_type -- string(20), values: page/image
     short_url -- string(30)
-    created_at -- timestamp
     """
     def __init__(self, **kwargs):
         """ Create new link and assign default values. """

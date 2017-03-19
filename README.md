@@ -15,8 +15,6 @@
   * description (text 255)
   * media_type (text 20)
   * short_url (text 30)
-  * created_at (numeric)
-  * updated_at (numeric)
 
 * **settings:**
   * id (int, primary key)

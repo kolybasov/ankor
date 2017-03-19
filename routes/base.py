@@ -11,7 +11,6 @@ class BaseRoute(ABC):
 
         if type(handler) is dict:
             method = 'index' if len(kwargs) == 0 else 'show'
-            print(method)
             handler = handler[method]
 
         return handler(*args, **kwargs)
