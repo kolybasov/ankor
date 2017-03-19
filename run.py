@@ -21,11 +21,16 @@ log.setLevel(logging.ERROR)
 # Connect to DB
 db = Database(cfg.get('db.name', './ankor_sqlite.db'))
 
-# Prepare models
-models.setup(db)
-
 # Create Flask app
 app = Flask(__name__)
+
+# Init DB
+with app.open_resource('./migrations.sql', mode='r') as f:
+    db.__connection__.executescript(f.read())
+db.__connection__.commit()
+
+# Prepare models
+models.setup(db)
 
 # Set secret
 app.config.update(dict(
