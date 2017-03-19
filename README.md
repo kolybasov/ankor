@@ -1,26 +1,22 @@
 # Ankor
 
-## General
+## Requirements
 
-## Core
+* python 3
+* pip 3
+* sqlite 3
 
-### Database
+## Installation
 
-#### Tables
+* `$ git clone https://github.com/kolybasov/ankor && cd ankor`
+* `$ make init`
+* `$ [sudo] chmod +x ./run.py`
 
-* **links**:
-  * id (int, primary key)
-  * url (text 255)
-  * title (text 100)
-  * description (text 255)
-  * media_type (text 20)
-  * short_url (text 30)
+## Usage
 
-* **settings:**
-  * id (int, primary key)
-  * listen_clipboard (numeric 1)
-  * start_at_login (numeric 1)
-  * short_all_links (numeric 1)
-  * api_provider (text 20)
+* Copy URL with length 30+ symbols and open url from config.
+Default is [http://127.0.0.1:3333](http://127.0.0.1:3333)
 
-## Client
+## Tests
+
+* `$ make test`
