@@ -1,3 +1,3 @@
-static/fonts/* linguist-vendored
-static/styles/bulma.css linguist-vendored
-static/styles/font-awesome.css linguist-vendored
+/static/fonts/* linguist-vendored
+/static/styles/* linguist-vendored
+/static/styles/app.css linguist-vendored=false
